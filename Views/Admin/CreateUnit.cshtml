@@ -1,3 +1,6 @@
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
 @model DataTwo
 <div class="d-flex justify-content-around">
 <div class="col-6">
@@ -48,6 +51,7 @@
                 <option value="@item.RouteId">@item.PointA - @item.PointB</option>
             }
         </select>
+        <input type="hidden" asp-for="@Model.Unit.CreatorId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("AdminId")">
         <input type="submit" value="Register" class="mt-4 btn btn-outline-secondary w-100 p-3">
         
     </form>

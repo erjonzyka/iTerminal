@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yINDBvmsB5M8DUvaaRYNY+VTs3yCXQtwXXVAVB5IZ+o=",
+  "Hash": "8D937P4n1MK3rbyaJWlJ12hoR+7YOP9p54oGYhsOMhQ=",
   "Source": "iTerminal",
   "BasePath": "_content/iTerminal",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\iTerminal\\wwwroot\\uploads\\22945a9c-44ef-4eb3-a452-fe2e9abc7fbb_Academy.png",
+      "SourceId": "iTerminal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\iTerminal\\wwwroot\\",
+      "BasePath": "_content/iTerminal",
+      "RelativePath": "uploads/22945a9c-44ef-4eb3-a452-fe2e9abc7fbb_Academy.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\22945a9c-44ef-4eb3-a452-fe2e9abc7fbb_Academy.png"
     }
   ]
 }
