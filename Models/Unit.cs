@@ -20,6 +20,8 @@ public class Unit
     [Range(1, int.MaxValue, ErrorMessage = "Value must be greater than or equal to 1")]
     public int Seats {get;set;}
     public string? Description { get; set; }
+
+    [FutureDate]
     public DateTime Nisja { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
