@@ -1,0 +1,62 @@
+@model List<Unit>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+</head>
+
+<body>
+
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle mb-3 text-white" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by Category
+        </button>
+        <ul class="dropdown-menu">
+            @foreach (var item in Model.AllCategories)
+            {
+                <li><a class="dropdown-item" asp-action="ShopByCategory" asp-route-id="@item.CategoryId">@item.Name</a></li>
+            }
+        </ul>
+    </div>
+
+    <section id="page-header">
+
+        <h2 class="text-white">#stayhome</h2>
+        <p class="text-white">Save money</p>
+    </section>
+
+    <div class="container text-center">
+        @foreach (var item in Model)
+        {
+            <div class="d-inline-flex p-4 justify-content-center">
+                <div class="card text-white bg-dark" style="width: 15rem;">
+                    <img class="card-img-top" src="~/uploads/@item" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@item.AllAssociations.unit.Name</h5>
+                        <p class="card-text text-center font-weight-bold">@item.Brand</p>
+                        <p class="card-text text-center">Price: @item.Price</p>
+                        <a asp-action="ItemDetails" class="btn btn-outline-primary text-center card-text align-items-center"
+                            asp-route-id="@item.ProductId" asp-controller="Home">Show More</a>
+                    </div>
+                    <div class="mb-3">
+                        @if (@HttpContextAccessor.HttpContext.Session.GetInt32("AdminId") != null)
+                        {
+                            <a asp-action="DeleteItem" class="btn btn-danger" asp-route-id="@item.ProductId"
+                                asp-controller="Admin">Delete</a>
+                            <a asp-action="EditItem" class="btn btn-success" asp-route-id="@item.ProductId"
+                                asp-controller="Admin">Edit</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

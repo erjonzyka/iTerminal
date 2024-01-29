@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using iTerminal.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace iTerminal.Controllers;
 
@@ -23,6 +24,25 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         return View();
+    }
+
+
+    [HttpPost("Show")]
+    public IActionResult Show(Linja searched)
+    {
+        if(ModelState.IsValid){
+            List<Unit> AllUnits = _context.Units.Include(e=> e.route).Include(e=> e.Creator).Where(e=> e.route.PointA == searched.PointA && e.route.PointB== searched.PointB).ToList();
+            return RedirectToAction("Shfaq", AllUnits);
+        }
+        return View("Index");
+
+
+    }
+
+    [HttpGet("shop")]
+    public IActionResult Shfaq(List<Linja>AllUnits)
+    {
+        return View(AllUnits);
     }
 
     public IActionResult Privacy()

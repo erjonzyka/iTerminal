@@ -1,2 +1,22 @@
-﻿<a asp-action="CompanyLogin" asp-controller="Login" class="btn btn-danger">Login as company</a>
-<a asp-action="Index" asp-controller="Login" class="btn btn-danger">Login as User</a>
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model Linja
+
+
+<div class="main-form">
+    <form asp-action="Show" method="post" asp-controller="Home">
+        <div class="container d-flex justify-content-around">
+        <div class="form-group">
+            <label asp-for="PointA">Nisja</label>
+            <input asp-for="PointA" class="form-control" id="exampleFormControlInput1" >
+            <span asp-validation-for="PointA" class="text-danger font-italic mb-3"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PointB">Mberritja</label>
+            <input asp-for="PointB" class="form-control" id="exampleFormControlInput1" >
+            <span asp-validation-for="PointB" class="text-danger font-italic mb-3"></span>
+        </div>
+        <input type="submit" class="btn btn-outline-primary">
+        </div>
+        </form>
+</div>

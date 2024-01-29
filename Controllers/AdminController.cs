@@ -106,6 +106,38 @@ public IActionResult CreateUnit(){
         return View("CreateUnit", DataTwo);
     }
 
+    [AdminCheck]
+    [HttpGet("myunits")]
+    public IActionResult MyUnits(int page = 1)
+{
+    int pageSize = 10; // Number of items to display per page
+
+    // Retrieve the products with associated categories
+    IQueryable<Unit> unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId"));;
+
+    
+
+    // Pagination
+    var totalProducts = unitsQuery.Count();
+    var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+    // Ensure the requested page is within the valid range
+    page = Math.Max(1, Math.Min(page, totalPages));
+
+    // Apply pagination to the query
+    var units = unitsQuery.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    // Pass the paginated and sorted data to the view
+    var viewModel = new PaginatedProductViewModel
+    {
+        Units = units,
+        PageNumber = page,
+        TotalPages = totalPages,
+    };
+
+    return View(viewModel);
+}
+
 
 }
 

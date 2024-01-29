@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.main-form{
+  background-color: gold;
+  padding: 40px;
+  border-radius: 30px;
+}

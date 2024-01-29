@@ -1,0 +1,60 @@
+@model PaginatedProductViewModel
+
+<!-- Your existing table code -->
+<table class="table  table-dark table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Njesia</th>
+            <th scope="col">Image</th>
+            <th scope="col">Cmimi i biletes</th>
+            <th scope="col">Vendet</th>
+            <th scope="col">Linja</th>
+            <th scope="col">Kompania</th>
+            <th scope="col">Nisja</th>
+            <th scope="col">Actions</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Units)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td><img src="~/uploads/@item.ImageFileName" alt="item image" class="s-logo"></td>
+                <td>@item.Price</td>
+                <td>@item.Seats</td>
+                <td>@item.route.PointA - @item.route.PointB</td>
+                <td>@item.Creator.Name</td>
+                <td>@item.Nisja.ToString("MM/dd/yyyy HH:mm")</td>
+                <td>
+                   <a asp-action="DeleteItem" class="btn btn-outline-danger mr-2" asp-route-id="@item.UnitId" asp-controller="Admin">Delete</a>
+                </td>
+                <td><a asp-action="EditItem" class="btn btn-outline-success" asp-route-id="@item.UnitId" asp-controller="Admin">Edit  </a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination links -->
+<div class="pagination">
+   <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+            <a class="page-link bg-dark" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" tabindex="-1">Previous</a>
+        </li>
+        
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link bg-dark" href="@Url.Action("Index", new { page = i })">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link bg-dark" href="@Url.Action("Index", new { page = Model.PageNumber + 1})">Next</a>
+        </li>
+    </ul>
+</nav>
+</div>
+
+

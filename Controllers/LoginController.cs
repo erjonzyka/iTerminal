@@ -139,5 +139,13 @@ public class LoginController : Controller
         }
     }
 
+    [SessionCheck]
+    [HttpGet("logout")]
+    public IActionResult LogOut()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index", "Home");
+    }
+
     
 }
