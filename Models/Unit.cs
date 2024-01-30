@@ -33,6 +33,8 @@ public class Unit
 
     public Linja? route {get;set;}
 
+    public List<Trip>? trips {get;set;}
+
     public string? ImageFileName { get; set; } 
         public byte[]? ImageData { get; set; } 
 

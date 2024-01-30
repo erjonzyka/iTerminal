@@ -1,0 +1,38 @@
+@model List<Trip>
+
+    <div class="text-center">Nisjet e ardhshme: </div>
+
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Kompania</th>
+      <th scope="col">Mjeti</th>
+      <th scope="col">Linja</th>
+      <th scope="col">Nisja</th>
+      <th scope="col">Nr Rezervuar</th>
+      <th scope="col">Totali</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var item in Model){
+    <tr>
+      <th scope="row">@item.TripId</th>
+      <td>@item.Unit.Creator.Name</td>
+      <td>@item.Unit.Name</td>
+      <td>@item.Unit.route.PointA - @item.Unit.route.PointB</td>
+      <td>@item.Unit.Nisja.ToString("dddd MMM yyyy")</td>
+      <td>@item.Seats</td>
+      @{
+        TimeSpan timeDifference = @item.Unit.Nisja - DateTime.Now;
+        if (timeDifference.TotalMinutes > 5)
+        {
+            <td><a asp-action="Anullo" asp-route-id="@item.TripId" class="btn btn-danger">Anullo</a></td>
+        }
+        }
+        <td>@item.Total</td>
+    </tr>
+    }
+  </tbody>
+</table>

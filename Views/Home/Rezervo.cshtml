@@ -22,7 +22,8 @@
         <input type="hidden" asp-for="@Model.Trip.UserId" value="@Model.User.id">
         <input type="hidden" asp-for="@Model.Trip.UnitId" value="@Model.Unit.UnitId">
         </div>
-         <button type="button" class="mt-4 btn btn-success w-100 p-3" onclick="confirmTravel(@Model.Unit.Seats,event)">Konfirmo</button>
+         <button type="button" class="mt-4 btn btn-success w-100 p-3" onclick="confirmTravel(@Model.Unit.Seats, '@Model.Unit.Nisja.ToString("yyyy-MM-ddTHH:mm:ss")', event)">Konfirmo</button>
+
     </form>
 
 </div>

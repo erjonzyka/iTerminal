@@ -18,6 +18,7 @@ public class MyContext : DbContext
     public DbSet<Unit> Units {get;set;} 
     public DbSet<Association> Associations {get;set;} 
     public DbSet<Linja> Routes {get;set;} 
+    public DbSet<Trip> Trips {get;set;} 
     
     
 }

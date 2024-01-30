@@ -27,8 +27,7 @@ document.addEventListener('DOMContentLoaded', calculateTotal);
 
 
 
-function confirmTravel(qty, event) {
-
+function confirmTravel(qty, reservationDate, event) {
     event.preventDefault();
 
     var inputTrip = document.querySelector('#tripInput');
@@ -36,15 +35,26 @@ function confirmTravel(qty, event) {
     // Parse the input value as an integer
     var inputValue = parseInt(inputTrip.value);
 
+    // Check if reservation date is in the past
+    if (new Date(reservationDate) < new Date()) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Rezervimi nuk eshte i mundur!',
+            text: 'Data e udhëtimit ka kaluar, nuk mund të bëhet rezervim për këtë udhëtim.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+        return; // Stop further execution if the reservation date has passed
+    }
+
     if (inputValue > qty) {
         Swal.fire({
             icon: 'error',
             title: 'Nuk ka mjaftueshem vende!',
-            text: 'Na vjen keq por numri i vendeve qe ju kerkoni te rezervoni e kalon kapacitetin.',
+            text: 'Na vjen keq, por numri i vendeve që ju kërkoni të rezervoni e kalon kapacitetin.',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'OK'
         });
-
 
         inputTrip.value = qty;
     } else {
@@ -58,7 +68,6 @@ function confirmTravel(qty, event) {
             confirmButtonText: 'Po, e konfirmoj!'
         }).then((result) => {
             if (result.isConfirmed) {
-
                 Swal.fire({
                     icon: 'success',
                     title: 'Sukses!',
@@ -77,3 +86,4 @@ function confirmTravel(qty, event) {
         });
     }
 }
+

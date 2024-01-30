@@ -31,8 +31,7 @@ public class HomeController : Controller
     public IActionResult Show(Linja searched)
     {
         if(ModelState.IsValid){
-            List<Unit> AllUnits = _context.Units.Include(e=> e.route).Include(e=> e.Creator).Where(e=> e.route.PointA.ToLower() == searched.PointA.ToLower() && e.route.PointB.ToLower() == searched.PointB.ToLower()).ToList();
-             _logger.LogInformation($"Number of units found: {AllUnits.Count}");
+            List<Unit> AllUnits = _context.Units.Include(e=> e.route).Include(e=> e.Creator).Where(e=> e.route.PointA.ToLower() == searched.PointA.ToLower() && e.route.PointB.ToLower() == searched.PointB.ToLower() && e.Nisja > DateTime.Now && e.Seats > 0).ToList();
             return View("Shfaq", AllUnits);
         }
         return View("Index");
@@ -53,6 +52,35 @@ public class HomeController : Controller
         data.Unit = requestedUnit;
         data.User = loggedUser;
         return View(data);
+    }
+
+    [SessionCheck]
+    [HttpPost("confirm")]
+    public IActionResult Confirm(Trip trip){
+        Unit? unitToUpdate = _context.Units.FirstOrDefault(e=> e.UnitId == trip.UnitId);
+        unitToUpdate.Seats -= trip.Seats;
+        trip.Total = trip.Seats * unitToUpdate.Price;
+        _context.Add(trip);
+        _context.SaveChanges();
+        return RedirectToAction("UpcomingTrips");
+    }
+
+    [SessionCheck]
+    [HttpGet("upcoming")]
+    public IActionResult UpcomingTrips(){
+        List<Trip> upcomingTrips = _context.Trips.Include(e=> e.Unit).ThenInclude(e=> e.route).Include(e=> e.Unit.Creator).Include(e=> e.User).Where(e=> e.UserId == HttpContext.Session.GetInt32("UserId") && e.Unit.Nisja > DateTime.Now).OrderByDescending(e=> e.Unit.Nisja).ToList();
+        return View(upcomingTrips);
+    }
+
+    [SessionCheck]
+    [HttpGet("anullo/{id}")]
+    public IActionResult Anullo(int id){
+        Trip? tripToRemove = _context.Trips.FirstOrDefault(e=> e.TripId == id);
+        Unit? unitToUpdate = _context.Units.FirstOrDefault(e=> e.UnitId == tripToRemove.UnitId);
+        unitToUpdate.Seats+= tripToRemove.Seats;
+        _context.Remove(tripToRemove);
+        _context.SaveChanges();
+        return RedirectToAction ("UpcomingTrips");
     }
 
     public IActionResult Privacy()
