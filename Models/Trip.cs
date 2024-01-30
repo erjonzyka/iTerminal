@@ -8,17 +8,17 @@ public class Trip
 {
     [Key]
     public int TripId { get; set; }
-    [FutureDate(ErrorMessage = "Koha nuk mund te jete ne te pasmen")]
-    public DateTime Start {get;set;}
     [Required(ErrorMessage ="Numri i vendeve nuk mund te jete bosh")]
     [Range(1, int.MaxValue, ErrorMessage = "Vlera duhet te jete me e madhe se 1")]
     public int Seats {get;set;}
-    public int? RouteId { get; set; }
+
+    public int? Total {get;set;}
+    public int? UnitId { get; set; }
 
     public int? UserId { get; set; }
 
-    public Route? Route { get; set; }
-    public UserReg? Company { get; set; }
+    public Unit? Unit { get; set; }
+    public UserReg? User { get; set; }
 }
 
 

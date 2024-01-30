@@ -21,7 +21,7 @@ public class Unit
     public int Seats {get;set;}
     public string? Description { get; set; }
 
-    [FutureDate]
+    [FutureDate(ErrorMessage ="Data e Udhetimit duhet te jete ne te ardhmen")]
     public DateTime Nisja { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;

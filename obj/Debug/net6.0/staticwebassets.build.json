@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8D937P4n1MK3rbyaJWlJ12hoR+7YOP9p54oGYhsOMhQ=",
+  "Hash": "3sKWhX5oUU25A9siK3vPjQwV2gV42cn+PIA4xBd+hCc=",
   "Source": "iTerminal",
   "BasePath": "_content/iTerminal",
   "Mode": "Default",
@@ -1086,6 +1086,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\22945a9c-44ef-4eb3-a452-fe2e9abc7fbb_Academy.png"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\iTerminal\\wwwroot\\uploads\\8bea1331-8dca-4b15-bcce-a81adebb8ce8_Academy.png",
+      "SourceId": "iTerminal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\iTerminal\\wwwroot\\",
+      "BasePath": "_content/iTerminal",
+      "RelativePath": "uploads/8bea1331-8dca-4b15-bcce-a81adebb8ce8_Academy.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\8bea1331-8dca-4b15-bcce-a81adebb8ce8_Academy.png"
+    },
+    {
+      "Identity": "C:\\Users\\zykae\\OneDrive\\Documents\\iTerminal\\wwwroot\\uploads\\90602df4-8a9a-4b0b-b5c7-48e6cbeb4b81_tiro23.png",
+      "SourceId": "iTerminal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zykae\\OneDrive\\Documents\\iTerminal\\wwwroot\\",
+      "BasePath": "_content/iTerminal",
+      "RelativePath": "uploads/90602df4-8a9a-4b0b-b5c7-48e6cbeb4b81_tiro23.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\90602df4-8a9a-4b0b-b5c7-48e6cbeb4b81_tiro23.png"
     }
   ]
 }

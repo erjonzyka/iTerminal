@@ -11,8 +11,8 @@ using iTerminal.Models;
 namespace iTerminal.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240127200055_first1212121")]
-    partial class first1212121
+    [Migration("20240129140643_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

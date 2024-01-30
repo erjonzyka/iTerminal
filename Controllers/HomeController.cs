@@ -31,18 +31,28 @@ public class HomeController : Controller
     public IActionResult Show(Linja searched)
     {
         if(ModelState.IsValid){
-            List<Unit> AllUnits = _context.Units.Include(e=> e.route).Include(e=> e.Creator).Where(e=> e.route.PointA == searched.PointA && e.route.PointB== searched.PointB).ToList();
-            return RedirectToAction("Shfaq", AllUnits);
+            List<Unit> AllUnits = _context.Units.Include(e=> e.route).Include(e=> e.Creator).Where(e=> e.route.PointA.ToLower() == searched.PointA.ToLower() && e.route.PointB.ToLower() == searched.PointB.ToLower()).ToList();
+             _logger.LogInformation($"Number of units found: {AllUnits.Count}");
+            return View("Shfaq", AllUnits);
         }
         return View("Index");
-
-
     }
 
-    [HttpGet("shop")]
-    public IActionResult Shfaq(List<Linja>AllUnits)
+    [HttpGet("present")]
+    public IActionResult Shfaq(List<Unit> AllUnits)
     {
         return View(AllUnits);
+    }
+
+    [SessionCheck]
+    [HttpGet("rezervo/{id}")]
+    public IActionResult Rezervo(int id){
+        Unit? requestedUnit = _context.Units.Include(e=>e.Creator).FirstOrDefault(e=> e.UnitId == id);
+        UserReg? loggedUser = _context.Users.FirstOrDefault(e=> e.id == HttpContext.Session.GetInt32("UserId"));
+        PaginatedProductViewModel data = new PaginatedProductViewModel ();
+        data.Unit = requestedUnit;
+        data.User = loggedUser;
+        return View(data);
     }
 
     public IActionResult Privacy()

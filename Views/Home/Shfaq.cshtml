@@ -13,50 +13,55 @@
 
 </head>
 
-<body>
-
+@if(Model.Count == 0){
+    <h1 class="text-center mt-5">Nuk u gjenden rezultate</h1>
+}
+else{
     <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle mb-3 text-white" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             Filter by Category
         </button>
         <ul class="dropdown-menu">
-            @foreach (var item in Model.AllCategories)
+            @foreach (var item in Model)
             {
-                <li><a class="dropdown-item" asp-action="ShopByCategory" asp-route-id="@item.CategoryId">@item.Name</a></li>
+                <li><a class="dropdown-item" asp-action="ShopByCategory" asp-route-id="@item.UnitId">@item.Name</a></li>
             }
         </ul>
     </div>
 
-    <section id="page-header">
+    
+    <h1 class="text-center mb-5">U gjenden : @Model.Count rezultate</h1>
 
-        <h2 class="text-white">#stayhome</h2>
-        <p class="text-white">Save money</p>
-    </section>
-
-    <div class="container text-center">
+    <div class="container text-center align-items-center">
         @foreach (var item in Model)
         {
-            <div class="d-inline-flex p-4 justify-content-center">
-                <div class="card text-white bg-dark" style="width: 15rem;">
-                    <img class="card-img-top" src="~/uploads/@item" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">@item.AllAssociations.unit.Name</h5>
-                        <p class="card-text text-center font-weight-bold">@item.Brand</p>
-                        <p class="card-text text-center">Price: @item.Price</p>
-                        <a asp-action="ItemDetails" class="btn btn-outline-primary text-center card-text align-items-center"
-                            asp-route-id="@item.ProductId" asp-controller="Home">Show More</a>
-                    </div>
-                    <div class="mb-3">
-                        @if (@HttpContextAccessor.HttpContext.Session.GetInt32("AdminId") != null)
-                        {
-                            <a asp-action="DeleteItem" class="btn btn-danger" asp-route-id="@item.ProductId"
-                                asp-controller="Admin">Delete</a>
-                            <a asp-action="EditItem" class="btn btn-success" asp-route-id="@item.ProductId"
-                                asp-controller="Admin">Edit</a>
-                        }
-                    </div>
-                </div>
-            </div>
+            <div class="card mb-3 justify-content-center" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="~/uploads/@item.ImageFileName" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title">@item.Name</h3>
+        <h5 class="card-title">@item.Creator.Name</h5>
+        <p class="card-text">@item.Description</p>
+        <p class="card-text">ALL @item.Price</p>
+        <p class="card-text"><strong>Nisja : @item.Nisja.ToString("dddd MMM yyyy")</strong></p>
+        <p class="card-text">
+            @if(@item.Seats < 10){
+                <small class="text-danger"> Nxito, vetem @item.Seats vende te lira</small>
+            }
+            else{
+            <small class="text-muted">Vende te lira : @item.Seats</small>
+            }
+            </p>
+            <a asp-action="Rezervo" asp-route-id="@item.UnitId" class="btn btn-outline-primary w-100 p-3">Rezervo Tani</a>
+      </div>
+    </div>
+  </div>
+</div>
         }
     </div>
+}
+        

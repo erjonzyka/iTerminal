@@ -1,0 +1,29 @@
+@model PaginatedProductViewModel
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<div class="d-flex justify-content-around">
+<div class="col-6">
+    <img src="~/uploads/@Model.Unit.ImageFileName" alt="company-logo">
+</div>
+
+<div class="col-5">
+    <h2>Detajet e Biletes</h2>
+    <p><strong>Emri: </strong> @Model.User.FirstName @Model.User.LastName</p>
+    <p><strong>Email: </strong> @Model.User.Email</p>
+    <p><strong>Kompania me te cilen po udhetoni: </strong> @Model.Unit.Creator.Name</p>
+    <p><strong>Data e Udhetimit:</strong> @Model.Unit.Nisja.ToString("dddd MMM yyyy")</p>
+    <form asp-action="Confirm" method="post" id="reservationForm">
+        <div class="form-group">
+        <label asp-for="@Model.Trip.Seats" class="font-weight-bold mb-3">Sa vende deshironi te rezervoni?</label>
+        <input asp-for="@Model.Trip.Seats" class="form-control"  id="tripInput" onchange="calculateTotal(@Model.Unit.Price)" min="1">
+        <span asp-validation-for="@Model.Trip.Seats" class="text-danger"></span>
+        <h3 id="Totali"></h3>
+        <input type="hidden" asp-for="@Model.Trip.UserId" value="@Model.User.id">
+        <input type="hidden" asp-for="@Model.Trip.UnitId" value="@Model.Unit.UnitId">
+        </div>
+         <button type="button" class="mt-4 btn btn-success w-100 p-3" onclick="confirmTravel(@Model.Unit.Seats,event)">Konfirmo</button>
+    </form>
+
+</div>
+</div>
