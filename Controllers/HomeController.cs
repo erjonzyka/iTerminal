@@ -83,10 +83,13 @@ public class HomeController : Controller
         return RedirectToAction ("UpcomingTrips");
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    [SessionCheck]
+    [HttpGet("print/{id}")]
+    public IActionResult Print(int id)
+{
+     Trip? trip = _context.Trips.Include(e=> e.Unit).ThenInclude(e=> e.route).Include(e=> e.Unit.Creator).Include(e=> e.User).FirstOrDefault(e=> e.TripId == id);
+    return View(trip); 
+}
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

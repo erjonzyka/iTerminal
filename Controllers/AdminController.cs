@@ -107,13 +107,29 @@ public IActionResult CreateUnit(){
     }
 
     [AdminCheck]
+    [HttpGet("myunitspast")]
+    public IActionResult MyUnitsPast(){
+
+        return RedirectToAction("MyUnits", new { nisja = 1 });
+    }
+
+    [AdminCheck]
     [HttpGet("myunits")]
-    public IActionResult MyUnits(int page = 1)
+    public IActionResult MyUnits(int page = 1, int nisja = 0)
 {
     int pageSize = 10; // Number of items to display per page
 
+    IQueryable<Unit> unitsQuery = _context.Units.AsQueryable();;
+
     // Retrieve the products with associated categories
-    IQueryable<Unit> unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId"));;
+    switch(nisja){
+        case 0 :  unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId") && e.Nisja > DateTime.Now);;
+        break;
+        case  1:
+         unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId") && e.Nisja < DateTime.Now);;
+        break;
+    }
+   
 
     
 

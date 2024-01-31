@@ -87,3 +87,10 @@ function confirmTravel(qty, reservationDate, event) {
     }
 }
 
+
+function printPage() {
+    var button = document.querySelector("#buttonToCall")
+    button.classList.add('no-print');
+    window.print();
+    button.classList.remove('no-print');
+}

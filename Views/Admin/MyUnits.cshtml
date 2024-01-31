@@ -1,7 +1,22 @@
 @model PaginatedProductViewModel
 
+
+<div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle mb-3" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Shfaq sipas nisjes
+        </button>
+        <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-action="MyUnits">Udhetimet e ardhshme</a></li>
+                <li><a class="dropdown-item" asp-action="MyUnitsPast">Udhetimet e kaluara</a></li>
+        </ul>
+    </div>
+
+
+
+
 <!-- Your existing table code -->
-<table class="table  table-dark table-hover">
+<table class="table table-hover text-center">
     <thead>
         <tr>
             <th scope="col">Njesia</th>
@@ -36,22 +51,22 @@
 </table>
 
 <!-- Pagination links -->
-<div class="pagination">
+<div class="pagination d-flex justify-content-center">
    <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
-            <a class="page-link bg-dark" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" tabindex="-1">Previous</a>
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" tabindex="-1">Previous</a>
         </li>
         
         @for (int i = 1; i <= Model.TotalPages; i++)
         {
             <li class="page-item @(i == Model.PageNumber ? "active" : "")">
-                <a class="page-link bg-dark" href="@Url.Action("Index", new { page = i })">@i</a>
+                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
             </li>
         }
 
         <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
-            <a class="page-link bg-dark" href="@Url.Action("Index", new { page = Model.PageNumber + 1})">Next</a>
+            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1})">Next</a>
         </li>
     </ul>
 </nav>

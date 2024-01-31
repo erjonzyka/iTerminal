@@ -12,7 +12,8 @@
       <th scope="col">Nisja</th>
       <th scope="col">Nr Rezervuar</th>
       <th scope="col">Totali</th>
-      <th></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -24,14 +25,18 @@
       <td>@item.Unit.route.PointA - @item.Unit.route.PointB</td>
       <td>@item.Unit.Nisja.ToString("dddd MMM yyyy")</td>
       <td>@item.Seats</td>
+      <td>@item.Total</td>
       @{
         TimeSpan timeDifference = @item.Unit.Nisja - DateTime.Now;
         if (timeDifference.TotalMinutes > 5)
         {
             <td><a asp-action="Anullo" asp-route-id="@item.TripId" class="btn btn-danger">Anullo</a></td>
         }
+        else{
+          <td></td>
         }
-        <td>@item.Total</td>
+        }
+        <td><a asp-action="Print" asp-route-id="@item.TripId" class="btn btn-primary">Printo</a></td>
     </tr>
     }
   </tbody>
