@@ -1,22 +1,62 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @model Linja
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
 
+
+ <h1 class="text-center font-kanit mb-4"><strong>Book Cheap Tickets</strong></h1>
+ <p class="text-center font-kanit mb-4">Check Bus Schedules, Compare Prices and Book Your Ticket Online</p>
 
 <div class="main-form">
     <form asp-action="Show" method="post" asp-controller="Home">
         <div class="container d-flex justify-content-around">
         <div class="form-group">
-            <label asp-for="PointA">Nisja</label>
-            <input asp-for="PointA" class="form-control" id="exampleFormControlInput1" >
+            <input asp-for="PointA" class="form-control edited-form" id="exampleFormControlInput1" placeholder="From">
             <span asp-validation-for="PointA" class="text-danger font-italic mb-3"></span>
         </div>
         <div class="form-group">
-            <label asp-for="PointB">Mberritja</label>
-            <input asp-for="PointB" class="form-control" id="exampleFormControlInput1" >
+            <input asp-for="PointB" class="form-control" id="exampleFormControlInput1" placeholder="To">
             <span asp-validation-for="PointB" class="text-danger font-italic mb-3"></span>
         </div>
         <input type="submit" class="btn btn-outline-primary">
         </div>
         </form>
 </div>
+
+<section class="mid-content">
+ <div class="portofolio d-flex">
+                <div class="box2">
+                    <img src="~/images/bus1.jpg" alt="img1">
+                    <h4 class="text-center font-kanit">Built-in Shortcode</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, odio nostrum deleniti quidem
+                        cumque amet consequatur minima perspiciatis ipsa consectetur nemo praesentium, maiores ea.</p>
+                </div>
+                <div class="box2">
+                    <img src="~/images/tirana.jpg" alt="img1">
+                    <h4 class="text-center font-kanit">Built-in Shortcode</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, odio nostrum deleniti quidem
+                        cumque amet consequatur minima perspiciatis ipsa consectetur nemo praesentium, maiores ea.</p>
+                </div>
+                <div class="box2">
+                    <img src="~/images/transport.jpg" alt="img1">
+                    <h4 class="text-center font-kanit">Built-in Shortcode</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, odio nostrum deleniti quidem
+                        cumque amet consequatur minima perspiciatis ipsa consectetur nemo praesentium, maiores ea.</p>
+                </div>
+                <div class="box2">
+                    <img src="~/images/bus1.jpg" alt="img1">
+                    <h4 class="text-center font-kanit">Built-in Shortcode</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, odio nostrum deleniti quidem
+                        cumque amet consequatur minima perspiciatis ipsa consectetur nemo praesentium, maiores ea.</p>
+                </div>
+            </div>
+     </section>
+
+
+     <section class="text-center font-kanit banner-two">
+        <h1 class="mb-4"><strong>Ja disa nga arsyet pse duhet te na zgjidhni ne: </strong></h1>
+        <h4 class="mb-4">🕒 Oraret Fleksibël: Udhëtoni në kohën që ju përshtatet më mirë. Oraret tona janë të përshtatshme për çdo udhëtar.</h4>
+        <h4 class="mb-4">🌍 Destinacione të Shumta: Nga qytetet e mëdha deri te piktoresket bregdetet, kemi një gamë të gjerë të destinacioneve.</h4>
+         <h4 class="mb-4">👥 Shërbimi Shkëlqyeshëm ndaj Udhëtarëve: Ekipi ynë pritet me zemërgjerësi për t'ju ofruar një eksperiencë të mrekullueshme udhëtimi.</h4>
+    </section>

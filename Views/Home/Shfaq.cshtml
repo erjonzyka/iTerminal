@@ -17,23 +17,11 @@
     <h1 class="text-center mt-5">Nuk u gjenden rezultate</h1>
 }
 else{
-    <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle mb-3 text-white" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Filter by Category
-        </button>
-        <ul class="dropdown-menu">
-            @foreach (var item in Model)
-            {
-                <li><a class="dropdown-item" asp-action="ShopByCategory" asp-route-id="@item.UnitId">@item.Name</a></li>
-            }
-        </ul>
-    </div>
 
     
     <h1 class="text-center mb-5">U gjenden : @Model.Count rezultate</h1>
 
-    <div class="container text-center align-items-center">
+    <div class="container text-center d-flex justify-content-center">
         @foreach (var item in Model)
         {
             <div class="card mb-3 justify-content-center" style="max-width: 540px;">

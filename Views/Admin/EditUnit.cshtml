@@ -1,0 +1,56 @@
+@model DataTwo
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+    <div class="text-center">
+        <h2 >Ndrysho njesine e sherbimit!</h2>
+    </div>
+
+    <form asp-action="UpdateUnit" method="post" enctype="multipart/form-data" asp-controller="Admin" asp-route-id="@Model.Unit.UnitId">
+
+        <div class="form-group">
+            <label  asp-for="@Model.Unit.Name"></label>
+            <input asp-for="@Model.Unit.Name" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+            <span asp-validation-for="@Model.Unit.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  asp-for="@Model.Unit.Price"></label>
+            <input asp-for="@Model.Unit.Price" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" min="1">
+            <span asp-validation-for="@Model.Unit.Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  asp-for="@Model.Unit.Seats"></label>
+            <input asp-for="@Model.Unit.Seats" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" min="1">
+            <span asp-validation-for="@Model.Unit.Seats" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  asp-for="@Model.Unit.Nisja"></label>
+            <input asp-for="@Model.Unit.Nisja" class="form-control" type="datetime-local" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+            <span asp-validation-for="@Model.Unit.Nisja" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  asp-for="@Model.Unit.Description"></label>
+            <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                asp-for="@Model.Unit.Description"></textarea>
+        </div>
+        <div class="form-group">
+            <label  asp-for="@Model.Unit.ImageFile" class="control-label"></label>
+            <input asp-for="@Model.Unit.ImageFile" class="form-control e" type="file">
+            <span asp-validation-for="@Model.Unit.ImageFile" class="text-danger"></span>
+        </div>
+        <label >Add A Category</label>
+        <select class="form-control " asp-for="@Model.Unit.RouteId">
+            @foreach (var item in @Model.Routes)
+            {
+                <option value="@item.RouteId">@item.PointA - @item.PointB</option>
+            }
+        </select>
+        <input type="hidden" asp-for="@Model.Unit.CreatorId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("AdminId")">
+        <input type="submit" value="Ndrysho" class="mt-4 btn btn-success w-100 p-3">
+        
+    </form>
+    

@@ -1,0 +1,32 @@
+@model Unit
+
+<div class="text-center">
+    <h1>@Model.route.PointA - @Model.route.PointB </h1>
+</div>
+
+<h3><strong>Mjeti:</strong> @Model.Name</h3>
+<h3><strong>Vende te lira:</strong> @Model.Seats</h3>
+
+<div class="col-6 justify-content-end">
+<h3><strong>Udhetaret: </strong></h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Emri</th>
+      <th scope="col">Mbiemri</th>
+      <th scope="col">Vendet</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var item in Model.trips){
+    <tr>
+      <td>@item.User.FirstName</td>
+      <td>@item.User.LastName</td>
+      <td>@item.Seats</td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+</div>

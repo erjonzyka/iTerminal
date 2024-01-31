@@ -19,10 +19,80 @@ body {
 
 .main-form{
   background-color: gold;
-  padding: 40px;
+  padding: 30px;
   border-radius: 30px;
 }
 
 .s-logo{
   width: 6em;
 }
+
+.portofolio{
+  justify-content: center;
+}
+
+.box2{
+  padding-right: 20px;
+  display: flex;
+ flex-direction: column;
+}
+
+.box2 img{
+  border: 3px solid gray;
+}
+
+.box2 h4{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #dd8314;
+  font-family: 'Kanit', Times, serif;
+}
+
+#end{
+  margin-top: 30px;
+  margin-right: 20px;
+  text-align: end;
+  font-size: small;
+  color: rgba(163,163,161,255)
+}
+
+.mid-content{
+  margin-top: 30px;
+}
+
+.font-kanit{
+  font-family: 'Kanit', Courier, monospace;
+}
+
+.lg-banner{
+  margin-top: 30px;
+  font-family: 'Honk', Courier, monospace;
+}
+
+
+
+#reklama h2 {
+  font-family: 'Open Sans', sans-serif;
+  color: #007BFF; 
+}
+
+.banner-two{
+  margin-top: 30px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

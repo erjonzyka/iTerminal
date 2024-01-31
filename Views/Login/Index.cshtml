@@ -7,27 +7,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" />
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Honk&display=swap" />
 </head>
 
 <body>
+    <div class="d-flex justify-content-around">
     <div class="col-6">
-    <h1 class="text-white">Login</h1>
+    <h1 class="font-kanit">Logohu ne adresen tende</h1>
     
     <form asp-action="Login" method="post" asp-controller="Login">
         <div class="form-group">
-            <label asp-for="LEmail" class="text-white">Email</label>
-            <input asp-for="LEmail" class="form-control bg-black text-white" id="exampleFormControlInput1" >
+            <label asp-for="LEmail">Email</label>
+            <input asp-for="LEmail" class="form-control" id="exampleFormControlInput1" >
             <span asp-validation-for="LEmail" class="text-danger font-italic mb-3"></span>
         </div>
         <div class="form-group">
-            <label asp-for="LPassword" class="text-white">Password</label>
-            <input asp-for="LPassword" type="password" class="form-control bg-black text-white"  id="exampleInputPassword1">
+            <label asp-for="LPassword">Password</label>
+            <input asp-for="LPassword" type="password" class="form-control"  id="exampleInputPassword1">
             <span asp-validation-for="LPassword" class="text-danger font-italic mb-3"></span>
         </div>
         <button type="submit" class="mt-4 btn btn-primary w-100 p-3">Login</button>
     </form>
     <a asp-action="ClientRegister" asp-controller="Login" class="mt-4 btn btn-outline-success w-100 p-3">Register</a>
     </div>
+    <div class="col-5 lg-banner text-center">
+        <h1>Rezervoni biletën tuaj</h1>
+        <h2>për autobusin që ju çon drejt aventurave të reja.</h2>
+    </div>
+    </div>
 </body>
+
 
 </html>

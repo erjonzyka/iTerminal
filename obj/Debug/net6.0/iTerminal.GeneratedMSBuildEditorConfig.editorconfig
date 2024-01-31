@@ -19,12 +19,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlVW5pdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Admin/EditUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFVuaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Admin/MyUnits.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTXlVbml0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Admin/UnitDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVW5pdERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Admin/_NewRoute.cshtml]
@@ -53,6 +61,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Home/Shfaq.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaGZhcS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Home/ShowMessage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaG93TWVzc2FnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zykae/OneDrive/Documents/iTerminal/Views/Home/UpComingTrips.cshtml]

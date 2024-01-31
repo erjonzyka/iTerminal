@@ -32,7 +32,7 @@ public class AdminController : Controller
 [AdminCheck]
 public IActionResult Index()
 {
-    return View();   
+    return RedirectToAction("MyUnits");   
 }
 
 [AdminCheck]
@@ -174,6 +174,70 @@ public IActionResult Delete(int id){
     _context.Remove(unitToDelete);
     _context.SaveChanges();
     return RedirectToAction("MyUnits");
+}
+
+[AdminCheck]
+[HttpGet("editunit")]
+public IActionResult EditUnit (int id){
+    DataTwo DataTwo = new DataTwo();
+    DataTwo.Routes= _context.Routes.ToList();
+    Unit? requestedUnit = _context.Units.Include(e=> e.AllAssociations).FirstOrDefault(e=> e.UnitId == id);
+    DataTwo.Unit = requestedUnit;
+    return View(DataTwo);
+}
+
+[AdminCheck]
+[HttpPost("updateunit")]
+public async Task<IActionResult> UpdateUnit (DataTwo data, int id){
+if (ModelState.IsValid)
+    {
+ 
+        Unit unitFromDb = _context.Units.Include(e => e.AllAssociations).ThenInclude(e => e.route).FirstOrDefault(e => e.UnitId == id);
+
+    
+        unitFromDb.Name = data.Unit.Name;
+        unitFromDb.Price = data.Unit.Price;
+        unitFromDb.Seats = data.Unit.Seats;
+        unitFromDb.Nisja = data.Unit.Nisja;
+        unitFromDb.UpdatedAt = DateTime.Now;
+        unitFromDb.RouteId = data.Unit.RouteId;
+
+
+
+        // Check if a new image file is uploaded
+        if (data.Unit.ImageFile != null && data.Unit.ImageFile.Length > 0)
+        {
+            var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + data.Unit.ImageFile.FileName;
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await data.Unit.ImageFile.CopyToAsync(fileStream);
+            }
+
+            unitFromDb.ImageFileName = uniqueFileName;
+            unitFromDb.ImageData = await System.IO.File.ReadAllBytesAsync(filePath);
+        }
+
+        await _context.SaveChangesAsync(); 
+
+        return RedirectToAction("MyUnits");
+    }
+
+    data.Routes= _context.Routes.ToList();
+    return View("EditUnit", data);
+    
+}
+
+[SessionCheck]
+[HttpGet("unitdetails")]
+public IActionResult UnitDetails (int id){
+    Unit? requestedUnit = _context.Units.Include(e=> e.route).Include(e=> e.Creator).Include(e=>e.trips).ThenInclude(e=> e.User).FirstOrDefault(e=> e.UnitId == id);
+    if(requestedUnit.CreatorId != HttpContext.Session.GetInt32("AdminId")){
+        return RedirectToAction("MyUnits");
+    }
+    return View(requestedUnit);
 }
 
 }

@@ -65,11 +65,27 @@ public class HomeController : Controller
         return RedirectToAction("UpcomingTrips");
     }
 
+
+
     [SessionCheck]
     [HttpGet("upcoming")]
-    public IActionResult UpcomingTrips(){
-        List<Trip> upcomingTrips = _context.Trips.Include(e=> e.Unit).ThenInclude(e=> e.route).Include(e=> e.Unit.Creator).Include(e=> e.User).Where(e=> e.UserId == HttpContext.Session.GetInt32("UserId") && e.Unit.Nisja > DateTime.Now).OrderByDescending(e=> e.Unit.Nisja).ToList();
+    public IActionResult UpComingTrips(int filter = 0){
+        List<Trip> upcomingTrips = new List<Trip>();
+        switch(filter){
+            case 0 :
+            upcomingTrips = _context.Trips.Include(e=> e.Unit).ThenInclude(e=> e.route).Include(e=> e.Unit.Creator).Include(e=> e.User).Where(e=> e.UserId == HttpContext.Session.GetInt32("UserId") && e.Unit.Nisja > DateTime.Now).OrderByDescending(e=> e.Unit.Nisja).ToList();
+            break;
+            case 1 :
+             upcomingTrips = _context.Trips.Include(e=> e.Unit).ThenInclude(e=> e.route).Include(e=> e.Unit.Creator).Include(e=> e.User).Where(e=> e.UserId == HttpContext.Session.GetInt32("UserId") && e.Unit.Nisja < DateTime.Now).OrderByDescending(e=> e.Unit.Nisja).ToList();
+            break;
+        }
         return View(upcomingTrips);
+    }
+
+    [SessionCheck]
+    [HttpGet("past")]
+    public IActionResult PastTrips (){
+        return RedirectToAction("UpComingTrips", new{filter = 1});
     }
 
     [SessionCheck]
@@ -101,8 +117,17 @@ public class HomeController : Controller
     [SessionCheck]
     [HttpGet("showmessage/{id}")]
     public IActionResult ShowMessage(int id){
-
-        return View();
+        Message? message = _context.Messages.Include(e=> e.Company).FirstOrDefault(e=> e.MessageId == id);
+        if(message.UserId != HttpContext.Session.GetInt32("UserId")){
+            return RedirectToAction("MyNotifications");
+        }
+        message.Seen = true;
+        UserReg? user = _context.Users.Include(e=>e.AllMessages).FirstOrDefault(e=> e.id == HttpContext.Session.GetInt32("UserId"));
+        if(!user.AllMessages.Any(e=> e.Seen == false)){
+            HttpContext.Session.SetInt32("Messages", 0);
+        }
+        _context.SaveChanges();
+        return View(message);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

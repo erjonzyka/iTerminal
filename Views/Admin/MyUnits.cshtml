@@ -28,6 +28,7 @@
             <th scope="col">Nisja</th>
             <th scope="col">Actions</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -41,13 +42,14 @@
                 <td>@item.route.PointA - @item.route.PointB</td>
                 <td>@item.Creator.Name</td>
                 <td>@item.Nisja.ToString("MM/dd/yyyy HH:mm")</td>
+                <td><a asp-action="UnitDetails" class="btn btn-secondary mr-2" asp-route-id="@item.UnitId" asp-controller="Admin">Shiko</a></td>
                 @{
                 TimeSpan timeDifference = @item.Nisja - DateTime.Now;
                 if(timeDifference.TotalMinutes > 5){
                 <td>
                    <a asp-action="Delete" class="btn btn-outline-danger mr-2" asp-route-id="@item.UnitId" asp-controller="Admin">Delete</a>
                 </td>
-                <td><a asp-action="EditItem" class="btn btn-outline-success" asp-route-id="@item.UnitId" asp-controller="Admin">Edit  </a></td>
+                <td><a asp-action="EditUnit" class="btn btn-outline-success" asp-route-id="@item.UnitId" asp-controller="Admin">Edit  </a></td>
                 }
                 }
             </tr>

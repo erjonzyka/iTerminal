@@ -1,6 +1,17 @@
 @model List<Trip>
 
-    <div class="text-center">Nisjet e ardhshme: </div>
+   <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle mb-3" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Shiko sipas dates
+        </button>
+        <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-action="UpComingTrips">Udhetimet e ardhshme</a></li>
+                <li><a class="dropdown-item" asp-action="PastTrips">Udhetimet e mepareshme</a></li>
+        </ul>
+    </div>
+
+    <h2 class="text-center">Nisjet e ardhshme: </h2>
 
     <table class="table table-hover">
   <thead>
