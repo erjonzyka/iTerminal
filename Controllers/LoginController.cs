@@ -38,7 +38,7 @@ public class LoginController : Controller
    [HttpPost("login")]
     public IActionResult Login(UserLogin user){
         if(ModelState.IsValid){
-            UserReg? CurrentUser = _context.Users.FirstOrDefault(e => e.Email == user.LEmail);
+            UserReg? CurrentUser = _context.Users.Include(e=>e.AllMessages).FirstOrDefault(e => e.Email == user.LEmail);
             if(CurrentUser == null){
                 ModelState.AddModelError("LEmail", "Invalid Username/Password");
                 return View("Index");
@@ -50,6 +50,9 @@ public class LoginController : Controller
                 return View("Index");
             }
             if(CurrentUser.Role == 1){
+                if(CurrentUser.AllMessages.Any(e=> e.Seen == false)){
+                    HttpContext.Session.SetInt32("Messages", 1);
+                }
                 HttpContext.Session.SetInt32("AdminId", CurrentUser.id);
                 HttpContext.Session.SetInt32("UserId", CurrentUser.id);
                 HttpContext.Session.SetString("UserName", CurrentUser.FirstName);

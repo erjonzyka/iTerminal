@@ -91,6 +91,20 @@ public class HomeController : Controller
     return View(trip); 
 }
 
+    [SessionCheck]
+    [HttpGet("mynotifications")]
+    public IActionResult MyNotifications(){
+        List<Message> AllMessages = _context.Messages.Include(e=> e.Company).Where(e => e.UserId == HttpContext.Session.GetInt32("UserId")).ToList();
+        return View(AllMessages);
+    }
+
+    [SessionCheck]
+    [HttpGet("showmessage/{id}")]
+    public IActionResult ShowMessage(int id){
+
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

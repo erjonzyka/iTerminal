@@ -21,7 +21,8 @@
         }
         else
         {
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 no-print">
+            <nav
+                class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 no-print">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">iTerminal</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -35,14 +36,29 @@
                             </li>
                             @if (@HttpContextAccessor.HttpContext.Session.GetInt32("UserId") != null)
                             {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                    asp-action="UpComingTrips">Udhetimet e Mia</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-danger text-white" asp-area="" asp-controller="Login"
-                                    asp-action="LogOut">Dil</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                                        asp-action="UpComingTrips">Udhetimet</a>
+                                </li>
+                                @if (@HttpContextAccessor.HttpContext.Session.GetInt32("Messages") != 1)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-primary" asp-area="" asp-controller="Home"
+                                            asp-action="MyNotifications"><strong>Njoftimet</strong></a>
+                                    </li>
+
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MyNotifications">Njoftimet
+                                            </a>
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-danger text-white" asp-area="" asp-controller="Login"
+                                        asp-action="LogOut">Dil</a>
+                                </li>
                             }
                             else
                             {
@@ -51,8 +67,8 @@
                                         company</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link text-dark" asp-action="Index" asp-controller="Login">Login as User</a>
-                            </li>
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="Login">Login as User</a>
+                                </li>
                             }
                         </ul>
                     </div>

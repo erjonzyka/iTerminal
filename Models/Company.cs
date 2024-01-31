@@ -32,7 +32,7 @@ public class Company
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     public List<Unit>? AllUnits  {get; set;}
-
+    public List<Message>? AllMessages  {get; set;}
     
 }
 

@@ -19,6 +19,7 @@ public class MyContext : DbContext
     public DbSet<Association> Associations {get;set;} 
     public DbSet<Linja> Routes {get;set;} 
     public DbSet<Trip> Trips {get;set;} 
+    public DbSet<Message> Messages {get;set;} 
     
     
 }

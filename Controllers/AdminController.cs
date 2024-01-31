@@ -123,7 +123,7 @@ public IActionResult CreateUnit(){
 
     // Retrieve the products with associated categories
     switch(nisja){
-        case 0 :  unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId") && e.Nisja > DateTime.Now);;
+        case 0 :  unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.trips).ThenInclude(e=> e.User).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId") && e.Nisja > DateTime.Now);;
         break;
         case  1:
          unitsQuery = _context.Units.Include(e => e.Creator).Include(e=> e.route).Where(e=> e.CreatorId == HttpContext.Session.GetInt32("AdminId") && e.Nisja < DateTime.Now);;
@@ -154,6 +154,27 @@ public IActionResult CreateUnit(){
     return View(viewModel);
 }
 
+[AdminCheck]
+[HttpGet("destroy/{id}")]
+public IActionResult Delete(int id){
+    Unit? unitToDelete = _context.Units.Include(e => e.Creator).Include(e=> e.trips).ThenInclude(e=> e.User).Include(e=> e.route).FirstOrDefault(e=> e.UnitId == id);
+    if(unitToDelete.Nisja<DateTime.Now || unitToDelete.CreatorId != HttpContext.Session.GetInt32("AdminId")){
+        return RedirectToAction("MyUnits");
+    }
+    String s = $"Na vjen keq tu njoftojme se udhetimi juaj i dates {unitToDelete.Nisja.ToString("dd, MMM yyyy")} i linjes {unitToDelete.route.PointA} - {unitToDelete.route.PointB} me kompanine {unitToDelete.Creator.Name} eshte anulluar. Ju lutem qendroni ne pritje per nje mundesi tjeter. Faleminderit!";
+    foreach(var item in unitToDelete.trips){
+        Message? message = new Message();
+        message.Content = s;
+        message.UserId = item.UserId;
+        message.CompanyId = HttpContext.Session.GetInt32("AdminId");
+        _context.Add(message);
+    }
+    List<Association> associations = _context.Associations.Where(e=> e.UnitId == id).ToList();
+    _context.RemoveRange(associations);
+    _context.Remove(unitToDelete);
+    _context.SaveChanges();
+    return RedirectToAction("MyUnits");
+}
 
 }
 

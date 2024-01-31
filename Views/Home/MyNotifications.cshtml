@@ -1,0 +1,22 @@
+@model List<Message>
+
+    <h1 class="text-center mb-5">
+        Njoftimet
+    </h1>
+
+
+    <div class="card" style="width: 70rem;">
+  <div class="card-header">
+    <strong>Mesazhet</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+    @foreach(var item in Model){
+        if(!item.Seen){
+    <a asp-action="ShowMessage" asp-route-id="@item.MessageId"><li class="list-group-item bg-primary text-white">@item.Company.Name</li></a>
+        }
+        else{
+            <a asp-action="ShowMessage" asp-route-id="@item.MessageId"><li class="list-group-item">@item.Company.Name</li></a>
+        }
+    }
+  </ul>
+</div>

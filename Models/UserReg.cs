@@ -29,6 +29,7 @@ public class UserReg
     public string Pwconfirm { get; set; }
 
     public List<Trip>? trips {get;set;}
+    public List<Message>? AllMessages  {get; set;}
     public int Role { get; set; } = 0 ;
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
