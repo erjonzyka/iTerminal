@@ -110,7 +110,7 @@ public class HomeController : Controller
     [SessionCheck]
     [HttpGet("mynotifications")]
     public IActionResult MyNotifications(){
-        List<Message> AllMessages = _context.Messages.Include(e=> e.Company).Where(e => e.UserId == HttpContext.Session.GetInt32("UserId")).ToList();
+        List<Message> AllMessages = _context.Messages.Include(e=> e.Company).Where(e => e.UserId == HttpContext.Session.GetInt32("UserId")).OrderByDescending(e=> e.MessageId).ToList();
         return View(AllMessages);
     }
 
